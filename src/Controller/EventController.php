@@ -43,6 +43,17 @@ class EventController extends AbstractController
         return new Response('Création d\'un event');
     }
 
+    
+    /**
+     * @Route("/event/random", name="event_random")
+     */
+    public function random()
+    {
+        // TODO
+        // Appel du service pour trouver un event aléatoire
+        // Redirection vers la page show avec l'id trouvé aléatoirement 
+    }
+
     /**
      * @Route("/event/{id}", name="event_show", requirements={"id"="\d+"})
      */

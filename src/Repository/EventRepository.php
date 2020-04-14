@@ -36,6 +36,17 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
+    public function getRandom(){
+        $stmt = $this->createQueryBuilder( 'e' );
+        $stmt->select('e.id');
+
+        // TODO 
+        // Installer https://github.com/beberlei/DoctrineExtensions
+        // Ajouter une séléction aléatoire
+
+        return $stmt->getQuery()->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */

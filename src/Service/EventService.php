@@ -25,4 +25,9 @@ class EventService{
     public function search( $query ){
         return $this->eventRepository->searchByName( $query );
     }
+
+    public function getRandom(){
+        // TODO
+        // Appeler et retourner la fonction du repo
+    }
 }
