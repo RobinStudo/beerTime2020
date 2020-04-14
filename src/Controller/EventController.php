@@ -49,9 +49,9 @@ class EventController extends AbstractController
      */
     public function random()
     {
-        // TODO
-        // Appel du service pour trouver un event aléatoire
-        // Redirection vers la page show avec l'id trouvé aléatoirement 
+        return $this->redirectToRoute( 'event_show', array(
+            'id' => $this->eventService->getRandom()
+        ));
     }
 
     /**

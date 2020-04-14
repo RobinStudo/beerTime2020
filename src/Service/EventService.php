@@ -27,7 +27,6 @@ class EventService{
     }
 
     public function getRandom(){
-        // TODO
-        // Appeler et retourner la fonction du repo
+        return $this->eventRepository->getRandom();
     }
 }

@@ -40,9 +40,9 @@ class EventRepository extends ServiceEntityRepository
         $stmt = $this->createQueryBuilder( 'e' );
         $stmt->select('e.id');
 
-        // TODO 
-        // Installer https://github.com/beberlei/DoctrineExtensions
-        // Ajouter une séléction aléatoire
+        $stmt->where( 'e.endAt > NOW()' );
+        $stmt->orderBy( 'RAND()' );
+        $stmt->setMaxResults( 1 );
 
         return $stmt->getQuery()->getSingleScalarResult();
     }
