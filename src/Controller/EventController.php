@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\EventService;
+use App\Entity\Event;
+use App\Repository\PlaceRepository;
+use App\Repository\UserRepository;
+use App\Entity\Place;
 
 class EventController extends AbstractController
 {
@@ -40,6 +45,7 @@ class EventController extends AbstractController
      */
     public function new()
     {
+
         return new Response('Création d\'un event');
     }
 
@@ -70,5 +76,16 @@ class EventController extends AbstractController
     public function join()
     {
         return new Response('Rejoindre un event');
+    }
+
+    /**
+     * @Route("/event/{id}/remove", name="event_remove")
+     */
+    public function remove( Event $event, EntityManagerInterface $em )
+    {
+        $em->remove( $event );
+        // $em->flush();
+
+        return $this->redirectToRoute( 'event_list' );
     }
 }
