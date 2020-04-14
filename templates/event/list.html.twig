@@ -5,7 +5,8 @@
 {% block body %}
 <div class="events">
     <h1>Nos événements</h1>
-
+    
+    <p>Il y a {{ nIncomingEvents }} événement(s) a venir</p>
     <div class="row">
         {% for event in events %}
             <div class="col-12 col-lg-4">

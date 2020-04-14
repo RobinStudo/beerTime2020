@@ -17,4 +17,12 @@ class EventService{
     public function get( $id ){
         return $this->eventRepository->find( $id );
     }
+
+    public function countIncomingEvent(){
+        return $this->eventRepository->countIncomingEvent();
+    }
+
+    public function search( $query ){
+        return $this->eventRepository->searchByName( $query );
+    }
 }

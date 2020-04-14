@@ -19,6 +19,23 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function countIncomingEvent(){
+        $stmt = $this->createQueryBuilder( 'e' );
+        $stmt->select( 'count(e.id)' );
+        $stmt->where( 'e.startAt > :now' );
+        $stmt->setParameter( 'now', new \DateTime() );
+
+        return $stmt->getQuery()->getSingleScalarResult();
+    }
+
+    public function searchByName( $query ){
+        $stmt = $this->createQueryBuilder( 'e' );
+        $stmt->where( 'e.name LIKE :query' );
+        $stmt->setParameter( 'query', '%' . $query . '%' );
+
+        return $stmt->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */
