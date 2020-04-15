@@ -12,6 +12,7 @@ use App\Entity\Event;
 use App\Repository\PlaceRepository;
 use App\Repository\UserRepository;
 use App\Entity\Place;
+use App\Form\EventType;
 
 class EventController extends AbstractController
 {
@@ -45,8 +46,12 @@ class EventController extends AbstractController
      */
     public function new()
     {
+        $event = new Event();
+        $form = $this->createForm( EventType::class, $event );
 
-        return new Response('Création d\'un event');
+        return $this->render( 'event/form.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     
