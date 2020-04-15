@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Créer un événement - {{ parent() }}{% endblock %}
+{% block title %}{{ isNew ? 'Créer' : 'Modifier' }} un événement - {{ parent() }}{% endblock %}
 
 {% block body %}
     {{ form_start( form, {
@@ -30,7 +29,7 @@
 
     
     <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary btn-lg">Créer</button>
+        <button type="submit" class="btn btn-primary btn-lg">{{ isNew ? 'Créer' : 'Modifier' }}</button>
     </div>
     {{ form_end( form ) }}
 {% endblock %}

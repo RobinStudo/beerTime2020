@@ -33,15 +33,16 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% set current_path = app.request.get('_route') %}
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('event_list') }}">Nos événements</a>
+                        <a class="nav-link {{ current_path == 'event_list' ? 'active' : '' }}" href="{{ path('event_list') }}">Nos événements</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('event_new') }}">Créer un événement</a>
+                        <a class="nav-link {{ current_path == 'event_new' ? 'active' : '' }}" href="{{ path('event_new') }}">Créer un événement</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('event_random') }}">Trouver l'inspiration</a>
+                        <a class="nav-link {{ current_path == 'event_random' ? 'active' : '' }}" href="{{ path('event_random') }}">Trouver l'inspiration</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" method="get" action="{{ path('event_list') }}">
