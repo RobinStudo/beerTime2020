@@ -57,6 +57,7 @@ class EventController extends AbstractController
             $em->persist( $event );
             $em->flush();
 
+            $this->addFlash( 'success', "Votre événement \"" . $event->getName() . "\" à bien été créé" );
             return $this->redirectToRoute( 'event_show', array(
                 'id' => $event->getId(),
             ));

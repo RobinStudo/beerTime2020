@@ -4,10 +4,22 @@ body{
     min-height: 100vh;
 }
 
+.toaster{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX( -50% );
+    z-index: 9999;
+}
+
 nav.navbar{
     background-color: #e67e22!important;
     .navbar-brand img{
         height: 40px;
+    }
+
+    .nav-link{
+        color: white!important;
     }
 }
 

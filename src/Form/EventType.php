@@ -39,13 +39,16 @@ class EventType extends AbstractType
             ))
             ->add('price', null, array(
                 'label' => 'Prix',
+                'help' => "Pour un événement gratuit laisser le champ vide",
             ))
             ->add('capacity', null, array(
                 'label' => 'Capacité',
+                'help' => "Pour un événement ilimité en terme de capacité laisser le champ vide",
             ))
             ->add('place', null, array(
                 'label' => 'Lieu',
                 'choice_label' => 'name',
+                'help' => "Seul les lieux partenaires peuvent accueillir des événements",
             ))
             ->add('categories', null, array(
                 'choice_label' => 'name',

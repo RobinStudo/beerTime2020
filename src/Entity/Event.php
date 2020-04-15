@@ -25,37 +25,57 @@ class Event
      * @Assert\Length(
      *      min = 4,
      *      max = 50,
+     *      minMessage = "Le nom doit comporter au minimum {{ limit }} caractères",
+     *      maxMessage = "Le nom doit comporter au maximum {{ limit }} caractères",
      * )
      * @ORM\Column(type="string", length=100)
      */
     private $name;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une description pour votre événement" )
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 500,
+     *      minMessage = "La description doit comporter au minimum {{ limit }} caractères",
+     *      maxMessage = "La description doit comporter au maximum {{ limit }} caractères",
+     * )
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une URL d'image pour votre événement" )
+     * @Assert\Url(
+     *    message = "Vous devez saisir une URL valide",
+     * )
+     * @Assert\Regex("/^.*\.(jpg|jpeg|png|webp)$/", message = "Votre URL doit pointer sur une image")
      * @ORM\Column(type="string", length=255)
      */
     private $picture;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une date de début pour votre événement" )
+     * @Assert\GreaterThan("now", message = "Vous devez choisir une date future" )
      * @ORM\Column(type="datetime")
      */
     private $startAt;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une date de fin pour votre événement" )
+     * @Assert\GreaterThan(propertyPath = "startAt", message = "Vous devez choisir une date supérieure à la date de début" )
      * @ORM\Column(type="datetime")
      */
     private $endAt;
 
     /**
+     * @Assert\Positive( message = "Vous devez saisir un montant supérieur à 0" )
      * @ORM\Column(type="float", nullable=true)
      */
     private $price;
 
     /**
+     * @Assert\Positive( message = "Vous devez saisir une capacité supérieur à 0" )
      * @ORM\Column(type="integer", nullable=true)
      */
     private $capacity;
@@ -66,6 +86,7 @@ class Event
     private $createdAt;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez choisir un lieu pour votre événement" )
      * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -139,7 +160,7 @@ class Event
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeInterface $startAt): self
+    public function setStartAt(\DateTimeInterface $startAt = null): self
     {
         $this->startAt = $startAt;
 
@@ -151,7 +172,7 @@ class Event
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTimeInterface $endAt): self
+    public function setEndAt(\DateTimeInterface $endAt = null): self
     {
         $this->endAt = $endAt;
 
