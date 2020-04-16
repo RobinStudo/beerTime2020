@@ -15,7 +15,15 @@ security:
         main:
             anonymous: lazy
             provider: db_provider
+            form_login:
+              login_path: user_login
+              check_path: user_login
+            logout:
+              path: /logout
+              target: /logout_success
 
     access_control:
+        - { path: ^/(register|login)$, allow_if: "is_anonymous()" }
+        - { path: ^/event/new$, roles: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

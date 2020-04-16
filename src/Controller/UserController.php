@@ -9,6 +9,7 @@ use App\Form\RegisterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -37,5 +38,36 @@ class UserController extends AbstractController
         return $this->render('user/register.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/login", name="user_login")
+     */
+    public function login( AuthenticationUtils $authUtils ){
+        return $this->render( 'user/login.html.twig', array(
+            'lastUsername' => $authUtils->getLastUsername(),
+            'error' => $authUtils->getLastAuthenticationError(),
+        ));
+    }
+
+    /**
+     * @Route("/logout", name="user_logout")
+     */
+    public function logout(){}
+
+    /**
+     * @Route("/login_success", name="user_login_success")
+     */
+    public function login_success(){
+        $this->addFlash( 'success', 'Vous êtes bien connecté' );
+        return $this->redirectToRoute( 'event_list' );
+    }
+
+    /**
+     * @Route("/logout_success", name="user_logout_success")
+     */
+    public function logout_success(){
+        $this->addFlash( 'success', 'Vous êtes bien déconnecté' );
+        return $this->redirectToRoute( 'main_home' );
     }
 }
