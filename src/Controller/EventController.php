@@ -13,13 +13,16 @@ use App\Repository\PlaceRepository;
 use App\Repository\UserRepository;
 use App\Entity\Place;
 use App\Form\EventType;
+use App\Service\MediaService;
 
 class EventController extends AbstractController
 {
     private $eventService;
+    private $mediaService;
 
-    public function __construct( EventService $eventService ){
+    public function __construct( EventService $eventService, MediaService $mediaService ){
         $this->eventService = $eventService;
+        $this->mediaService = $mediaService;
     }
 
     /**
@@ -53,6 +56,10 @@ class EventController extends AbstractController
         if( $form->isSubmitted() && $form->isValid() ){
             $owner = $userRepository->find( 1 );
             $event->setOwner( $owner );
+
+            $file = $event->getPictureFile();
+            $filename = $this->mediaService->upload( $file );
+            $event->setPicture( $filename );
 
             $em->persist( $event );
             $em->flush();
