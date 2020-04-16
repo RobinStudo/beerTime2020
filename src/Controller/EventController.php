@@ -114,6 +114,12 @@ class EventController extends AbstractController
 
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ){
+            $file = $event->getPictureFile();
+            if( !empty( $file ) ){
+                $filename = $this->mediaService->upload( $file );
+                $event->setPicture( $filename );
+            }
+
             $em->flush();
 
             $this->addFlash( 'success', "Votre événement \"" . $event->getName() . "\" à bien été modifié" );
