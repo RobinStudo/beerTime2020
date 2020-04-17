@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegisterType extends AbstractType
 {
@@ -40,6 +41,10 @@ class RegisterType extends AbstractType
                 'placeholder' => array(
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 )
+            ))
+            ->add( 'searchAddress', TextType::class, array(
+                'mapped' => false,
+                'label' => 'Rechercher votre adresse',
             ))
         ;
     }
