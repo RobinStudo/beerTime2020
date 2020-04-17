@@ -35,5 +35,13 @@
             </div>
         {% endfor %}
     </div>
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="?page={{ page - 1 }}" class="btn btn-outline-primary">Précédent</a>
+        {% endif %}
+        {% if page < maxPage %}
+            <a href="?page={{ page + 1 }}" class="btn btn-outline-primary">Suivant</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

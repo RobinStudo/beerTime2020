@@ -31,15 +31,20 @@ class EventController extends AbstractController
     public function list( Request $request )
     {
         $query = $request->query->get('query');
+        $page = $request->query->get('page') ?? 1;
 
         if( !empty( $query ) ){
             $events = $this->eventService->search( $query );
+            $pagination = array( 'page' => 1, 'maxPage' => 1 );
         }else{
-            $events = $this->eventService->getAll();
+            $pagination = $this->eventService->getPaginate( $page );
+            $events = $pagination['results'];
         }
 
         return $this->render( 'event/list.html.twig', array(
             'events' => $events,
+            'page' => $pagination['page'],
+            'maxPage' => $pagination['maxPage'],
             'nIncomingEvents' => $this->eventService->countIncomingEvent(),
         ));
     }
