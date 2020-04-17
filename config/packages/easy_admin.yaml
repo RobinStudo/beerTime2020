@@ -1,0 +1,20 @@
+easy_admin:
+    site_name: '<img src="/build/images/icon.png" height="40"/> BeerTime Manager'
+    user:
+        name_property_path: username
+    entities:
+        Categories:
+            class: App\Entity\Category
+        Utilisateurs:
+            class: App\Entity\User
+            form:
+                fields:
+                    - username
+                    - email
+                    - firstname
+                    - lastname
+                    - { property: 'birthday', type: 'birthday', label: 'Date de naissance' }
+                    - roles
+            new:
+                fields:
+                    - plainPassword

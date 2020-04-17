@@ -321,7 +321,13 @@ class Event
     /**
      * @ORM\PrePersist
      */
-    public function autoSetCreatedAt(){
+    public function autoSetCreatedAt()
+    {
         $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
