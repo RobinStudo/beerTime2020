@@ -108,3 +108,29 @@ footer{
         margin: 0;
     }
 }
+
+.autocompleter-container{
+    position: relative;
+
+    .form-group{
+        margin-bottom: 0;
+    }
+
+    #autocompleter{
+        position: absolute;
+        z-index: 10;
+        background-color: white;
+        left: 0;
+        right: 0;
+        border: 1px solid black;
+        padding: 0;
+
+        li{
+            list-style-type: none;
+            cursor: pointer;
+            &:hover{
+                background-color: grey;
+            }
+        }
+    }
+}

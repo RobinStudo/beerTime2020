@@ -106,6 +106,34 @@ class User implements UserInterface
      */    
     private $plainPassword;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $zipcode;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $country;
+    
+    /**
+    * @Assert\Expression(
+    *     "this.getAddress()",
+    *     message="Vous devez séléctionner une adresse valide"
+    * )
+    */
+    private $searchAddress;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -177,12 +205,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
+    public function getBirthday()
     {
         return $this->birthday;
     }
 
-    public function setBirthday(\DateTimeInterface $birthday): self
+    public function setBirthday( $birthday): self
     {
         $this->birthday = $birthday;
 
@@ -278,6 +306,66 @@ class User implements UserInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?int
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(int $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getSearchAddress(): ?string
+    {
+        return $this->searchAddress;
+    }
+
+    public function setSearchAddress(string $searchAddress): self
+    {
+        $this->searchAddress = $searchAddress;
 
         return $this;
     }

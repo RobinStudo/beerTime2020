@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Validator\Constraints\Expression;
+use Symfony\Component\Validator\Constraints\Callback;
 
 class RegisterType extends AbstractType
 {
@@ -42,8 +45,11 @@ class RegisterType extends AbstractType
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 )
             ))
+            ->add( 'address', HiddenType::class )
+            ->add( 'zipcode', HiddenType::class )
+            ->add( 'city', HiddenType::class )
+            ->add( 'country', HiddenType::class )
             ->add( 'searchAddress', TextType::class, array(
-                'mapped' => false,
                 'label' => 'Rechercher votre adresse',
             ))
         ;
